@@ -1,6 +1,7 @@
 package main
 
 import (
+	"changeme/x_logger"
 	"embed"
 
 	"github.com/wailsapp/wails/v2"
@@ -12,6 +13,9 @@ import (
 var assets embed.FS
 
 func main() {
+	logger := x_logger.NewLogger()
+	logger.Println("start ish worldcup")
+
 	app := NewApp()
 	err := wails.Run(&options.App{
 		Title:  "ish_worldcup",

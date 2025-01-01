@@ -1,0 +1,12 @@
+.menu-popup {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+.menu-popup.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}

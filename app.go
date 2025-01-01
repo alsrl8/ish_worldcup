@@ -1,8 +1,10 @@
 package main
 
 import (
+	"changeme/images"
+	"changeme/tournament"
+	"changeme/x_logger"
 	"context"
-	"fmt"
 )
 
 // App struct
@@ -21,7 +23,74 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
+func (a *App) AddImage(name string, data string) (string, error) {
+	errLogger := x_logger.NewErrorLogger()
+
+	res, err := images.AddImage(name, data)
+	if err != nil {
+		errLogger.Println("error: ", err)
+		return "", err
+	}
+	return res, nil
+}
+
+func (a *App) GetImageNum() (int, error) {
+	errLogger := x_logger.NewErrorLogger()
+
+	num, err := images.GetImageNum()
+	if err != nil {
+		errLogger.Println("error: ", err)
+		return 0, err
+	}
+	return num, nil
+}
+
+func (a *App) GetImageList(page int, perPage int) ([]*images.Image, error) {
+	errLogger := x_logger.NewErrorLogger()
+
+	imgs, err := images.GetImageList(page, perPage)
+	if err != nil {
+		errLogger.Println("error: ", err)
+		return nil, err
+	}
+	return imgs, nil
+}
+
+func (a *App) DeleteImage(id string) error {
+	errLogger := x_logger.NewErrorLogger()
+
+	err := images.DeleteImage(id)
+	if err != nil {
+		errLogger.Println("error: ", err)
+		return err
+	}
+	return nil
+}
+
+func (a *App) StartTournament() error {
+	return tournament.StartTournament()
+}
+
+func (a *App) GetTotalRound() (int, error) {
+	return tournament.GetTotalRound()
+}
+
+func (a *App) GetCurrentRound() (int, error) {
+	return tournament.GetCurrentRound()
+}
+
+func (a *App) GetCandidates() ([]images.Image, error) {
+	return tournament.GetCandidates()
+}
+
+func (a *App) GoToNextRound() (bool, error) {
+	return tournament.GoToNextRound()
+}
+
+func (a *App) SelectWinner(winnerId string, loserId string) error {
+	return tournament.SelectWinner(winnerId, loserId)
+}
+
+func (a *App) GetFinalWinner() (*images.Image, error) {
+	return tournament.GetFinalWinner()
 }

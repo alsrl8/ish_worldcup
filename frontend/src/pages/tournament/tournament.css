@@ -1,0 +1,38 @@
+.image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease; /* 확대 및 축소 애니메이션 */
+}
+
+.image-container.selected img {
+    transform: scale(1.05); /* 커지는 정도를 조정 */
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease; /* 원래 크기로 줄어들 때 애니메이션 */
+}
+
+.image-container .check-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5vw;
+    color: #5555ff;
+    font-weight: bold;
+    animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
