@@ -64,6 +64,7 @@ const Tournament = () => {
     winnerId: string | undefined,
     loserId: string | undefined,
     setSelected: any,
+    winnerImage: File | undefined,
   ) => {
     if (winnerId === undefined) {
       const _ = message.error("winner id is not set");
@@ -81,7 +82,7 @@ const Tournament = () => {
                 navigate("/result");
                 return;
               }
-              const _ = message.info("다음 라운드");
+              const _ = message.info("Selected " + winnerImage?.name);
               roundSetting();
             })
             .catch((err) => message.error(err));
@@ -118,7 +119,7 @@ const Tournament = () => {
                     marginBottom: "1vh",
                   }}
                   onClick={() =>
-                    onClickSelect(leftImageId, rightImageId, setLeftSelected)
+                    onClickSelect(leftImageId, rightImageId, setLeftSelected, leftImage)
                   }
                 >
                   선택
@@ -157,7 +158,7 @@ const Tournament = () => {
                     marginBottom: "1vh",
                   }}
                   onClick={() =>
-                    onClickSelect(rightImageId, leftImageId, setRightSelected)
+                    onClickSelect(rightImageId, leftImageId, setRightSelected, rightImage)
                   }
                 >
                   선택
